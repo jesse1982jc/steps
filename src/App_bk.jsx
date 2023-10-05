@@ -11,17 +11,14 @@ export default function App() {
   return (
     <div>
       <Steps />
-
       <StepMessage step={1}>
         <p>Pass in content</p>
         <p>🤟</p>
       </StepMessage>
-
       <StepMessage step={2}>
         <p>Read children prop</p>
         <p>💪</p>
       </StepMessage>
-
       {/* <Steps /> */}
     </div>
   );
@@ -61,37 +58,33 @@ function Steps() {
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
 
-          {/* // 加入一個 StepMessage 組件，可重複使用 */}
-          {/* {messages[step - 1]} 是 children */}
           <StepMessage step={step}>
             {messages[step - 1]}
-            {/* 加入一個 Button 組件，可重複使用 */}
             <div className="buttons">
               <Button
                 bgColor="#e7e7e7"
                 textColor="#333"
-                onClick={() => alert(`Learn how to: ${messages[step - 1]}`)}
+                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}
               >
-                {/* Learn how 是 children */}
                 Learn how
               </Button>
             </div>
           </StepMessage>
 
           <div className="buttons">
-            {/* 真正要用 Button 組件的地方，props 直接賦予值 或 及 格式、內容、順序…… */}
-            <Button bgColor="#7950f2" textColor="#fff" onClick={handlePrevious}>
-              {/* 以下這些元素都是 children */}
-              <span>😻</span>
+            {/* Button 組件因為使用 children prop，所以必須有 opening-tag，及 closing-tag */}
+            <Button textColor="#fff" bgColor="#7950f2" onClick={handlePrevious}>
+              {/* children prop start */}
+              <span>✈️</span>
               <span>👈</span>Previous
-              {/* 以上這些元素都是 children */}
+              {/* children prop end */}
             </Button>
 
-            <Button bgColor="#7950f2" textColor="#fff" onClick={handleNext}>
-              {/* 以下這些元素都是 children */}
+            <Button textColor="#fff" bgColor="#7950f2" onClick={handleNext}>
+              {/* children prop start */}
               Next<span>👉</span>
-              <span>😼</span>
-              {/* 以上這些元素都是 children */}
+              <span>🚀</span>
+              {/* children prop end */}
             </Button>
           </div>
         </div>
@@ -100,7 +93,6 @@ function Steps() {
   );
 }
 
-// 製作一個 StepMessage 組件，可重複使用
 function StepMessage({ step, children }) {
   return (
     <div className="message">
@@ -110,9 +102,9 @@ function StepMessage({ step, children }) {
   );
 }
 
-// 製作一個 Button 的組件，可重複使用
-// 定義好 props 屬性
-function Button({ bgColor, textColor, onClick, children }) {
+/* // 加入 children prop */
+/* // Button component (reusable) */
+function Button({ textColor, bgColor, onClick, children }) {
   return (
     <button
       onClick={onClick}
